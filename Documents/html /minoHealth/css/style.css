@@ -1,0 +1,135 @@
+/* colors 
+red == #FF7272
+blue == #00A3D8 */
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Lato", "Arial", "sans-serif";
+  line-height: 1.7;
+  color: #f7f6f6;
+  background: #111111;
+  /* background: #323639; */
+
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: #00a3d8;
+}
+
+p {
+  margin: 1.2rem;
+}
+
+.navbar {
+  display: flex;
+  padding: 2rem;
+  justify-content: space-around;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+}
+
+.navbar ul li {
+  margin: 0 2rem;
+}
+
+.social-media a {
+  margin: 0 0.2rem;
+}
+
+/* header {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../images/artificial-intelligence-in-healthcare.png");
+  background-size: cover;
+  background-position: top;
+  height: 95vh;
+  background-attachment: fixed;
+} */
+
+header {
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)); */
+  height: 95vh;
+}
+
+header .header-main {
+  display: flex;
+}
+
+.container {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+  /* overflow: hidden; */
+}
+
+.header-main .header-illustration {
+  height: 30rem;
+  width: auto;
+}
+
+.header-main .header-hero-text {
+  font-size: 1.5rem;
+  align-self: flex-end;
+  /* align-items: center; */
+}
+
+.header-main .red-shade {
+  color: #ff7272;
+}
+
+.header-main .blue-shade {
+  color: #00a3d8;
+}
+
+.header-main h1 {
+  text-align: center;
+}
+
+.header-main p {
+  /* text-align: center; */
+  padding: 1rem;
+}
+
+.btn:link,
+.btn:visited,
+input[type="submit"] {
+  display: inline-block;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  border-radius: 5rem;
+}
+
+.header-btn,
+input[type="submit"] {
+  background-color: #ff7272;
+  border: #ff7272;
+  color: #252729;
+  font-weight: bold;
+  margin-top: 5rem;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+.header-btn:hover,
+input {
+  background-color: darken(#00a3d8, 10%);
+}
