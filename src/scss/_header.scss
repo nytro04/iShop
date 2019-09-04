@@ -1,0 +1,49 @@
+// .header__logo {
+//   height: 1rem;
+// }
+
+.nav_line {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.header__carousel {
+  width: 100%;
+  height: 100%;
+}
+
+.carouselCont {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+}
+
+.ImgCont {
+  float: left !important;
+  width: 60%;
+}
+
+.TextCont {
+  padding: 1% !important;
+  position: relative;
+  height: 50%;
+  right: 4%;
+  width: 50%;
+  font-size: 25px;
+}
+
+.carousel-caption {
+  //   position: relative !important;
+  top: 30% !important;
+  height: 100% !important;
+  width: 130% !important;
+  color: black;
+}
+
+.carousel-indicators li {
+  background-color: black;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: none;
+}

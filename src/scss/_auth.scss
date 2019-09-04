@@ -1,0 +1,43 @@
+.login__forms {
+  max-width: 55%;
+  margin-top: 3rem;
+
+  & h1 {
+    margin-bottom: 5rem;
+  }
+
+  &-button {
+    text-transform: uppercase;
+    border-radius: 50px;
+    width: 8rem;
+    border-color: #fff;
+    background-color: $color-primary;
+
+    &:hover,
+    &:hover,
+    &:focus,
+    &:active,
+    &:visited,
+    &:focus-within {
+      background-color: $color-primary-dark !important;
+      border-color: #fff !important;
+      box-shadow: none;
+    }
+  }
+}
+
+.form-control:focus {
+  border-color: none;
+  box-shadow: none;
+}
+
+// .login__buttons {
+//   display: flex;
+//   justify-content: space-around;
+// }
+
+.login__gmail {
+  margin-left: 13rem !important;
+  cursor: pointer;
+  color: #4285f4;
+}
