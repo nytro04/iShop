@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Form, Button } from "react-bootstrap";
 import TextInput from "../common/TextInput";
+import { loginUser } from "../../actions/authActions";
 import { signInWithGoogle } from "../../firebase/Firebase.utils";
 
 class LogIn extends Component {
@@ -45,7 +47,17 @@ class LogIn extends Component {
     return (
       <div className="container login__forms">
         <h1>Login</h1>
-        <Formik validationSchema={LoginSchema} initialValues={initialValues}>
+        <Formik
+          validationSchema={LoginSchema}
+          initialValues={initialValues}
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            setSubmitting(true);
+
+            this.props.loginUser(values);
+            resetForm();
+            setSubmitting(false);
+          }}
+        >
           {({
             handleSubmit,
             handleChange,
@@ -105,4 +117,7 @@ class LogIn extends Component {
   }
 }
 
-export default LogIn;
+export default connect(
+  null,
+  { loginUser }
+)(LogIn);
