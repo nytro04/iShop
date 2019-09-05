@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { Form, Button } from "react-bootstrap";
 import TextInput from "../common/TextInput";
+import { registerUser } from "../../actions/authActions";
 
 class LogIn extends Component {
   handleSubmit = () => {};
@@ -21,6 +23,9 @@ class LogIn extends Component {
 
   render() {
     const RegisterSchema = Yup.object().shape({
+      displayName: Yup.string()
+        .required("Name Field is required")
+        .min(3, "Name must be at least 3 characters"),
       email: Yup.string()
         .required("Email field is required")
         .email("Invalid email"),
@@ -43,12 +48,28 @@ class LogIn extends Component {
         .oneOf([Yup.ref("password"), null], "Passwords must match")
     });
 
-    const initialValues = { email: "", password: "", confirmPassword: "" };
+    const initialValues = {
+      displayName: "",
+      email: "",
+      password: "",
+      confirmPassword: ""
+    };
 
     return (
       <div className="container login__forms">
         <h1>Register</h1>
-        <Formik validationSchema={RegisterSchema} initialValues={initialValues}>
+        <Formik
+          validationSchema={RegisterSchema}
+          initialValues={initialValues}
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            setSubmitting(true);
+
+            this.props.registerUser(values);
+            resetForm();
+            setSubmitting(false);
+            // console.log(values);
+          }}
+        >
           {({
             handleSubmit,
             handleChange,
@@ -58,6 +79,22 @@ class LogIn extends Component {
             errors
           }) => (
             <Form noValidate onSubmit={handleSubmit}>
+              <TextInput
+                type="text"
+                name="displayName"
+                placeholder="Full Name"
+                value={values.displayName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                isValid={
+                  touched.displayName && !errors.displayName ? true : false
+                }
+                isInvalid={!!errors.displayName ? true : false}
+                renderErrorText={this.renderError(
+                  errors.displayName,
+                  touched.displayName
+                )}
+              />
               <TextInput
                 type="email"
                 name="email"
@@ -113,4 +150,7 @@ class LogIn extends Component {
   }
 }
 
-export default LogIn;
+export default connect(
+  null,
+  { registerUser }
+)(LogIn);

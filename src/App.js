@@ -5,7 +5,7 @@ import Header from "./components/layouts/Header";
 import Register from "./components/auth/Register";
 import NavBar from "./components/layouts/NavBar";
 import LogIn from "./components/auth/LogIn";
-import { auth } from "./firebase/Firebase.utils";
+import { auth, createUserProfileDoc } from "./firebase/Firebase.utils";
 
 class App extends React.Component {
   state = {
@@ -15,10 +15,23 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user });
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDoc(userAuth);
 
-      console.log(user);
+        userRef.onSnapshot(snapShot => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          });
+
+          console.log(this.state);
+        });
+      } else {
+        this.setState({ currentUser: userAuth });
+      }
     });
   }
 

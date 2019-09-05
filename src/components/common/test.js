@@ -1,5 +1,7 @@
 import React from "react";
 import { Form } from "react-bootstrap";
+import { auth } from "firebase";
+import { createUserProfileDoc } from "../../firebase/Firebase.utils";
 
 const TextInput = ({
   type,
@@ -56,3 +58,15 @@ const TextInput = ({
 };
 
 export default TextInput;
+
+const { displayName, email, password, confirmPassword } = this.state 
+
+if (password....)
+
+try {
+  const { user } = await auth.createUserWithAndPassword(email, password)
+
+  createUserProfileDoc(user, { displayName})
+} catch (error) {
+  console.log(error)
+}
