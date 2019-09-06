@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { auth } from "../../firebase/Firebase.utils";
+// import CartIcon from "../../cart/CartIcon";
 
 // import LogoImg from "../../assets/apple_logo.png";
 
@@ -45,11 +47,14 @@ class NavBar extends Component {
             </Nav>
             <Nav>
               <Nav.Link as={Link} to="/">
-                <i className="fas fa-shopping-cart"></i>
-              </Nav.Link>
-              <Nav.Link as={Link} to="/">
                 <i className="fas fa-heart"></i>
               </Nav.Link>
+
+              <Nav.Link as={Link} to="/" className="cart-icon">
+                <i className="fas fa-shopping-cart"></i>
+                <span className="item-count">55</span>
+              </Nav.Link>
+
               {/* <Nav.Link as={Link} to="/">
                 <i className="fas fa-user"></i>
               </Nav.Link> */}
@@ -85,10 +90,17 @@ class NavBar extends Component {
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
+          {/* <CartIcon /> */}
         </Navbar>
       </div>
     );
   }
 }
 
-export default NavBar;
+const mapStateToProps = state => {
+  return {
+    currentUser: state.auth.currentUser
+  };
+};
+
+export default connect(mapStateToProps)(NavBar);

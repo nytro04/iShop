@@ -1,36 +1,32 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 import "./scss/style.scss";
 import Header from "./components/layouts/Header";
 import Register from "./components/auth/Register";
 import NavBar from "./components/layouts/NavBar";
 import LogIn from "./components/auth/LogIn";
 import { auth, createUserProfileDoc } from "./firebase/Firebase.utils";
+import { setCurrentUser } from "./actions/authActions";
+import history from "./history";
 
 class App extends React.Component {
-  state = {
-    currentUser: null
-  };
-
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDoc(userAuth);
 
         userRef.onSnapshot(snapShot => {
-          this.setState({
-            currentUser: {
-              id: snapShot.id,
-              ...snapShot.data()
-            }
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
           });
-
-          console.log(this.state);
         });
       } else {
-        this.setState({ currentUser: userAuth });
+        setCurrentUser(userAuth);
       }
     });
   }
@@ -41,18 +37,21 @@ class App extends React.Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <div className="container">
-          <NavBar currentUser={this.state.currentUser} />
+          <NavBar />
           <Switch>
             <Route exact path="/" component={Header} />
             <Route exact path="/login" component={LogIn} />
             <Route exact path="/register" component={Register} />
           </Switch>
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
 
-export default App;
+export default connect(
+  null,
+  { setCurrentUser }
+)(App);
