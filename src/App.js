@@ -1,40 +1,19 @@
 import React from "react";
 import { Router, Switch, Route } from "react-router-dom";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import "./scss/style.scss";
 import Header from "./components/layouts/Header";
 import Register from "./components/auth/Register";
 import NavBar from "./components/layouts/NavBar";
 import LogIn from "./components/auth/LogIn";
-import { auth, createUserProfileDoc } from "./firebase/Firebase.utils";
-import { setCurrentUser } from "./actions/authActions";
+// import { setCurrentUser } from "./actions/authActions";
 import history from "./history";
+import { Shop } from "./components/layouts/Shop";
+import AddProduct from "./components/product/AddProduct";
+import ItemListbk from "./components/product/ItemListbk";
+import ProductDetails from "./components/product/ProductDetails";
 
 class App extends React.Component {
-  unsubscribeFromAuth = null;
-
-  componentDidMount() {
-    const { setCurrentUser } = this.props;
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDoc(userAuth);
-
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
-          });
-        });
-      } else {
-        setCurrentUser(userAuth);
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
-
   render() {
     return (
       <Router history={history}>
@@ -44,6 +23,9 @@ class App extends React.Component {
             <Route exact path="/" component={Header} />
             <Route exact path="/login" component={LogIn} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/shop" component={ItemListbk} />
+            <Route exact path="/product/add" component={AddProduct} />
+            <Route exact path="/products/:id" component={ProductDetails} />
           </Switch>
         </div>
       </Router>
@@ -51,7 +33,4 @@ class App extends React.Component {
   }
 }
 
-export default connect(
-  null,
-  { setCurrentUser }
-)(App);
+export default App;

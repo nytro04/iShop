@@ -1,0 +1,22 @@
+.card-title {
+  text-align: center;
+  color: $color-primary;
+}
+
+.card-body {
+  p {
+    text-align: center;
+  }
+}
+
+.card__links {
+  text-align: center;
+  //   padding: 3rem;
+  color: #6c757d;
+
+  &-icon {
+    color: $color-primary;
+    font-size: large;
+    margin: 1rem;
+  }
+}

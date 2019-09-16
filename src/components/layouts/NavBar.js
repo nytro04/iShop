@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { auth } from "../../firebase/Firebase.utils";
+import { signOut } from "../../actions/authActions";
+
 // import CartIcon from "../../cart/CartIcon";
 
 // import LogoImg from "../../assets/apple_logo.png";
 
 class NavBar extends Component {
   render() {
-    const { currentUser } = this.props;
+    const { isLoggedIn, signOut } = this.props;
     return (
       <div>
         <Navbar collapseOnSelect expand="lg" className="nav_line">
@@ -77,10 +78,9 @@ class NavBar extends Component {
                   Settings
                 </NavDropdown.Item>
 
-                {currentUser ? (
-                  <NavDropdown.Item onClick={() => auth.signOut()}>
+                {isLoggedIn ? (
+                  <NavDropdown.Item onClick={signOut}>
                     Sign out
-                    {/* {currentUser.displayName} */}
                   </NavDropdown.Item>
                 ) : (
                   <NavDropdown.Item as={Link} to="/login">
@@ -99,8 +99,11 @@ class NavBar extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.auth.currentUser
+    isLoggedIn: state.auth.isLoggedIn
   };
 };
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(
+  mapStateToProps,
+  { signOut }
+)(NavBar);

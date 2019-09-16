@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { Form, Button } from "react-bootstrap";
 import TextInput from "../common/TextInput";
 import { loginUser } from "../../actions/authActions";
-import { signInWithGoogle } from "../../firebase/Firebase.utils";
+// import { signInWithGoogle } from "../../firebase/FirebaseConfig";
 
 class LogIn extends Component {
   renderError = (errors, touched) => {
@@ -26,20 +26,19 @@ class LogIn extends Component {
       email: Yup.string()
         .required("Email field is required")
         .email("Invalid email"),
-      password: Yup.string()
-        .required("Password field is required")
-        .min(8, "Password must be at least 8 characters")
-        .test(
-          "regex",
-          "Password must contain (uppercase, lowercase, number and special character)  eg.  4q6xmt@94;CNewH! ",
-          val => {
-            let regExp = new RegExp(
-              "^(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$"
-            );
-            // console.log(regExp.test(val), regExp, val);
-            return regExp.test(val);
-          }
-        )
+      password: Yup.string().required("Password field is required")
+      // .min(8, "Password must be at least 8 characters")
+      // .test(
+      //   "regex",
+      //   "Password must contain (uppercase, lowercase, number and special character)  eg.  4q6xmt@94;CNewH! ",
+      //   val => {
+      //     let regExp = new RegExp(
+      //       "^(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+      //     );
+      //     // console.log(regExp.test(val), regExp, val);
+      //     return regExp.test(val);
+      //   }
+      // )
     });
 
     const initialValues = { email: "", password: "" };
@@ -104,7 +103,7 @@ class LogIn extends Component {
                 <span
                   disabled={isSubmitting}
                   className="login__gmail"
-                  onClick={signInWithGoogle}
+                  // onClick={signInWithGoogle}
                 >
                   You can also login with your gmail account
                 </span>
