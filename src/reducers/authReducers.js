@@ -1,7 +1,8 @@
 import {
   SET_CURRENT_USER,
   LOGIN_SUCCESS,
-  SIGNOUT_SUCCESS
+  SIGNOUT_SUCCESS,
+  SIGNUP_SUCCESS
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -10,6 +11,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case SIGNUP_SUCCESS:
+      return {
+        ...state,
+        isLoggedIn: true
+      };
     case LOGIN_SUCCESS:
       return {
         ...state,

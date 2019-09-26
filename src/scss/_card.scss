@@ -1,7 +1,26 @@
-.card-title {
-  text-align: center;
-  color: $color-primary;
+.container .card {
+  transition: transform 0.2s;
 }
+
+.card:hover {
+  transform: scale(1.01);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  // color: $color-primary;
+  font-weight: 700;
+}
+
+.card-subtitle {
+  color: $color-primary;
+  font-weight: 700;
+}
+
+// .card a {
+//   text-decoration: none;
+//   color: #6c757d;
+// }
 
 .card-body {
   p {
@@ -17,6 +36,12 @@
   &-icon {
     color: $color-primary;
     font-size: large;
-    margin: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
   }
+}
+
+.card-text {
+  font-weight: 300;
+  font-size: 14px;
 }

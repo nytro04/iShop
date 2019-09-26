@@ -1,17 +1,43 @@
-import { SET_CURRENT_USER, LOGIN_SUCCESS, SIGNOUT_SUCCESS } from "./types";
+import {
+  SET_CURRENT_USER,
+  LOGIN_SUCCESS,
+  SIGNOUT_SUCCESS,
+  SIGNUP_SUCCESS
+} from "./types";
 
 import history from "../history";
 
 // register User
-export const registerUser = userData => async dispatch => {
-  // const { displayName, email, password } = userData;
-  // try {
-  //   const { user } = await auth.createUserWithEmailAndPassword(email, password);
-  //   createUserProfileDoc(user, { displayName });
-  //   history.push("/");
-  // } catch (error) {
-  //   console.log("error registering user", error);
-  // }
+export const registerUser = userData => (
+  dispatch,
+  getState,
+  { getFirebase, getFirestore }
+) => {
+  const { firstName, lastName, email, password } = userData;
+
+  const firebase = getFirebase();
+  const firestore = getFirestore();
+
+  firebase
+    .auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(response => {
+      return firestore
+        .collection("users")
+        .doc(response.user.uid)
+        .set({
+          firstName,
+          lastName,
+          initials: firstName[0] + lastName[0]
+        });
+    })
+    .then(() => {
+      dispatch({ type: SIGNUP_SUCCESS });
+      history.push("/");
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
 
 // login user with email and password

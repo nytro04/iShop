@@ -6,7 +6,7 @@ import { Form, Button } from "react-bootstrap";
 import TextInput from "../common/TextInput";
 import { registerUser } from "../../actions/authActions";
 
-class LogIn extends Component {
+class Register extends Component {
   handleSubmit = () => {};
 
   renderError = (errors, touched) => {
@@ -23,9 +23,12 @@ class LogIn extends Component {
 
   render() {
     const RegisterSchema = Yup.object().shape({
-      displayName: Yup.string()
+      firstName: Yup.string()
         .required("Name Field is required")
-        .min(3, "Name must be at least 3 characters"),
+        .min(3, "Last Name must be at least 3 characters"),
+      lastName: Yup.string()
+        .required("Last Name Field is required")
+        .min(3, "Last Name must be at least 3 characters"),
       email: Yup.string()
         .required("Email field is required")
         .email("Invalid email"),
@@ -34,11 +37,9 @@ class LogIn extends Component {
         .min(8, "Password must be at least 8 characters")
         .test(
           "regex",
-          "Password must contain (uppercase, lowercase, number and special character)  eg.  4q6xmt@94;CNewH! ",
+          "Password must contain (uppercase and lowercase characters)",
           val => {
-            let regExp = new RegExp(
-              "^(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$"
-            );
+            let regExp = new RegExp("[a-z].*[A-Z]|[A-Z].*[a-z]");
             // console.log(regExp.test(val), regExp, val);
             return regExp.test(val);
           }
@@ -49,7 +50,8 @@ class LogIn extends Component {
     });
 
     const initialValues = {
-      displayName: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
       confirmPassword: ""
@@ -81,18 +83,30 @@ class LogIn extends Component {
             <Form noValidate onSubmit={handleSubmit}>
               <TextInput
                 type="text"
-                name="displayName"
-                placeholder="Full Name"
-                value={values.displayName}
+                name="firstName"
+                placeholder="First Name"
+                value={values.firstName}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isValid={
-                  touched.displayName && !errors.displayName ? true : false
-                }
-                isInvalid={!!errors.displayName ? true : false}
+                isValid={touched.firstName && !errors.firstName ? true : false}
+                isInvalid={!!errors.firstName ? true : false}
                 renderErrorText={this.renderError(
-                  errors.displayName,
-                  touched.displayName
+                  errors.firstName,
+                  touched.firstName
+                )}
+              />
+              <TextInput
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={values.lastName}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                isValid={touched.lastName && !errors.lastName ? true : false}
+                isInvalid={!!errors.lastName ? true : false}
+                renderErrorText={this.renderError(
+                  errors.lastName,
+                  touched.lastName
                 )}
               />
               <TextInput
@@ -153,4 +167,4 @@ class LogIn extends Component {
 export default connect(
   null,
   { registerUser }
-)(LogIn);
+)(Register);

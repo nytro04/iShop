@@ -43,33 +43,4 @@ class Item extends React.Component {
   }
 }
 
-// const Item = ({ products }) => {
-//   return (
-//     <CardDeck>
-//       {products &&
-//         products.map(product => (
-//           <Card key={product.id}>
-//             <Card.Img variant="top" src={product.imageUrl} />
-//             <Card.Body>
-//               <Card.Title>{product.name}</Card.Title>
-//               <Card.Text>{product.description}</Card.Text>
-//               <Card.Text>$ {product.price}</Card.Text>
-//               <div className="card__links">
-//                 <Link to="/details/id">
-//                   <i className="fas fa-eye card__links-icon"></i>
-//                 </Link>
-//                 <Link to="/details/id">
-//                   <i className="fas fa-shopping-cart card__links-icon"></i>
-//                 </Link>
-//               </div>
-//             </Card.Body>
-//             <Card.Footer>
-//               <small className="text-muted">Last updated 3 mins ago</small>
-//             </Card.Footer>
-//           </Card>
-//         ))}
-//     </CardDeck>
-//   );
-// };
-
 export default Item;

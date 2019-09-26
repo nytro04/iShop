@@ -3,8 +3,14 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Link } from "react-router-dom";
+import { getProduct } from "../../actions/productActions";
 
 class ProductDetails extends Component {
+  componentDidMount() {
+    const { id } = this.props.match.params;
+
+    this.props.getProduct(id);
+  }
   renderProductDetails = () => {
     const { product } = this.props;
 
@@ -36,11 +42,11 @@ class ProductDetails extends Component {
 
                         <div className="mb-3">
                           <var className="price h3 text-primary">
-                            US $ {product.price}
+                            GHC {product.price}
                           </var>
                         </div>
                         <dl>
-                          <dt>Description</dt>
+                          <dt>Description:</dt>
                           <dd>
                             <p>{product.description} </p>
                           </dd>
@@ -103,6 +109,9 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 export default compose(
-  connect(mapStateToProps),
-  firestoreConnect(["products"])
+  connect(
+    mapStateToProps,
+    { getProduct }
+  )
+  // firestoreConnect(["products"])
 )(ProductDetails);

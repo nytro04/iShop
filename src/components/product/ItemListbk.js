@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { Container } from "react-bootstrap";
+import Items from "./Items";
 
-import Item from "./Item";
+// import ItemBk from "./ItemBk";
 
 class ItemList extends Component {
   render() {
@@ -12,7 +13,7 @@ class ItemList extends Component {
     console.log(products);
     return (
       <Container>
-        <Item products={products} />
+        <Items products={products} />
       </Container>
     );
   }

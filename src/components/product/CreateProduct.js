@@ -7,7 +7,7 @@ import { Form, Button } from "react-bootstrap";
 import TextInput from "../common/TextInput";
 import { createProduct } from "../../actions/productActions";
 
-class AddProduct extends Component {
+class CreateProduct extends Component {
   renderError = (errors, touched) => {
     if (!!errors) {
       return (
@@ -41,7 +41,7 @@ class AddProduct extends Component {
 
     return (
       <div className="container login__forms">
-        <h1>Register</h1>
+        <h1>Add New Product</h1>
         <Formik
           validationSchema={RegisterSchema}
           initialValues={initialValues}
@@ -77,7 +77,7 @@ class AddProduct extends Component {
               <TextInput
                 type="text"
                 name="description"
-                placeholder="Enter Product  description "
+                placeholder="Product  description "
                 value={values.description}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -93,7 +93,7 @@ class AddProduct extends Component {
               <TextInput
                 type="text"
                 name="imageUrl"
-                placeholder="Enter imageUrl"
+                placeholder="imageUrl"
                 value={values.imageUrl}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -108,7 +108,7 @@ class AddProduct extends Component {
               <TextInput
                 type="text"
                 name="price"
-                placeholder="Enter Product Price"
+                placeholder="Price"
                 value={values.price}
                 onChange={handleChange}
                 onBlur={handleBlur}
@@ -130,4 +130,4 @@ class AddProduct extends Component {
 export default connect(
   null,
   { createProduct }
-)(AddProduct);
+)(CreateProduct);

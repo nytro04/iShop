@@ -3,14 +3,16 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { signOut } from "../../actions/authActions";
-
-// import CartIcon from "../../cart/CartIcon";
-
-// import LogoImg from "../../assets/apple_logo.png";
+import { getCart, addToCart } from "../../actions/cartActions";
 
 class NavBar extends Component {
   render() {
-    const { isLoggedIn, signOut } = this.props;
+    const { isLoggedIn, signOut, cart } = this.props;
+
+    const cartQty = cart.length
+      ? cart.length
+      : JSON.parse(localStorage.getItem("iShopCart")).length;
+
     return (
       <div>
         <Navbar collapseOnSelect expand="lg" className="nav_line">
@@ -51,21 +53,23 @@ class NavBar extends Component {
                 <i className="fas fa-heart"></i>
               </Nav.Link>
 
-              <Nav.Link as={Link} to="/" className="cart-icon">
+              <Nav.Link
+                data-toggle="modal"
+                data-target="#cartModal"
+                as={Link}
+                to="/cart"
+                className="cart-icon"
+                // onClick={this.cartState}
+              >
                 <i className="fas fa-shopping-cart"></i>
-                <span className="item-count">55</span>
+                <span className="item-count">{cartQty}</span>
               </Nav.Link>
 
-              {/* <Nav.Link as={Link} to="/">
-                <i className="fas fa-user"></i>
-              </Nav.Link> */}
-
-              {/* if user in signedin show this else show signedin */}
               <NavDropdown
                 title={<i className="fas fa-user"></i>}
                 id="collasible"
               >
-                <NavDropdown.Item as={Link} to="/profile">
+                {/* <NavDropdown.Item as={Link} to="/profile">
                   Signed in as tweenyBrown
                 </NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/profile">
@@ -76,16 +80,35 @@ class NavBar extends Component {
                 </NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/settings">
                   Settings
-                </NavDropdown.Item>
+                </NavDropdown.Item> */}
 
                 {isLoggedIn ? (
-                  <NavDropdown.Item onClick={signOut}>
-                    Sign out
-                  </NavDropdown.Item>
+                  <div>
+                    <NavDropdown.Item onClick={signOut}>
+                      Signed in as tweenyBrown
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/profile">
+                      Your profile
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/profile">
+                      Settings
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/cart">
+                      Cart
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/settings">
+                      Sign out
+                    </NavDropdown.Item>
+                  </div>
                 ) : (
-                  <NavDropdown.Item as={Link} to="/login">
-                    Sign In
-                  </NavDropdown.Item>
+                  <div>
+                    <NavDropdown.Item as={Link} to="/login">
+                      Sign In
+                    </NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/cart">
+                      Cart
+                    </NavDropdown.Item>
+                  </div>
                 )}
               </NavDropdown>
             </Nav>
@@ -99,11 +122,12 @@ class NavBar extends Component {
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
+    cart: state.cart.cart
   };
 };
 
 export default connect(
   mapStateToProps,
-  { signOut }
+  { signOut, addToCart, getCart }
 )(NavBar);
