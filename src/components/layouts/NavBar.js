@@ -4,14 +4,26 @@ import { connect } from "react-redux";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { signOut } from "../../actions/authActions";
 import { getCart, addToCart } from "../../actions/cartActions";
+import { getMacBooks } from "../../actions/productActions";
 
 class NavBar extends Component {
+  state = {
+    cartQty: 0
+  };
+
+  // handleCartUpdate = () => {
+  //   this.props.getCart();
+  // };
+
   render() {
     const { isLoggedIn, signOut, cart } = this.props;
 
-    const cartQty = cart.length
-      ? cart.length
-      : JSON.parse(localStorage.getItem("iShopCart")).length;
+    // console.log(cart.length);
+
+    // const cartQty =
+    //   cart.length === 0
+    //     ? 0
+    //     : JSON.parse(localStorage.getItem("iShopCart")).length;
 
     return (
       <div>
@@ -24,14 +36,19 @@ class NavBar extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto">
-              <Nav.Link as={Link} to="/shop">
+              {/* <Nav.Link as={Link} to="/shop">
                 Shop
-              </Nav.Link>
+              </Nav.Link> */}
               <NavDropdown title="Categories" id="collasible-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/">
                   iPhones
                 </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/">
+                <NavDropdown.Item
+                  as={Link}
+                  to="/getMacbooks"
+
+                  // onClick={this.props.getMacBooks}
+                >
                   MacBooks
                 </NavDropdown.Item>
                 <NavDropdown.Item as={Link} to="/">
@@ -41,76 +58,87 @@ class NavBar extends Component {
                   iWatches
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to="/">
+              <Nav.Link as={Link} to="/about">
                 About Us
               </Nav.Link>
-              <Nav.Link as={Link} to="/">
+              <Nav.Link as={Link} to="/contact">
                 Contact
               </Nav.Link>
             </Nav>
             <Nav>
               <Nav.Link as={Link} to="/">
-                <i className="fas fa-heart"></i>
+                <i
+                  className="fas fa-heart"
+                  data-toggle="tooltip"
+                  data-placement="bottom"
+                  title="Liked items"
+                  delay="10"
+                ></i>
               </Nav.Link>
 
               <Nav.Link
-                data-toggle="modal"
-                data-target="#cartModal"
                 as={Link}
                 to="/cart"
                 className="cart-icon"
                 // onClick={this.cartState}
               >
-                <i className="fas fa-shopping-cart"></i>
-                <span className="item-count">{cartQty}</span>
+                <i
+                  className="fas fa-shopping-cart"
+                  data-toggle="tooltip"
+                  data-placement="bottom"
+                  title="User Cart"
+                  delay="100"
+                ></i>
+                <span className="item-count">{this.state.cartQty}</span>
               </Nav.Link>
 
               <NavDropdown
-                title={<i className="fas fa-user"></i>}
+                title={
+                  <i
+                    className="fas fa-user"
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="User Management"
+                    delay="100"
+                  ></i>
+                }
                 id="collasible"
               >
-                {/* <NavDropdown.Item as={Link} to="/profile">
-                  Signed in as tweenyBrown
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/profile">
-                  Your profile
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/cart">
-                  Cart
-                </NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/settings">
-                  Settings
-                </NavDropdown.Item> */}
-
                 {isLoggedIn ? (
                   <div>
-                    <NavDropdown.Item onClick={signOut}>
-                      Signed in as tweenyBrown
-                    </NavDropdown.Item>
+                    <NavDropdown.Item>tweenyBrown</NavDropdown.Item>
                     <NavDropdown.Item as={Link} to="/profile">
-                      Your profile
+                      Profile
                     </NavDropdown.Item>
                     <NavDropdown.Item as={Link} to="/profile">
                       Settings
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/cart">
-                      Cart
-                    </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/settings">
+                    <NavDropdown.Item onClick={signOut}>
                       Sign out
                     </NavDropdown.Item>
                   </div>
                 ) : (
                   <div>
                     <NavDropdown.Item as={Link} to="/login">
-                      Sign In
+                      Log In
                     </NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/cart">
-                      Cart
+                    <NavDropdown.Item as={Link} to="/register">
+                      Sign Up
                     </NavDropdown.Item>
                   </div>
                 )}
               </NavDropdown>
+              {isLoggedIn ? (
+                <Nav.Link as={Link} to="/products/new">
+                  <i
+                    className="fas fa-plus"
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="Add new product"
+                    delay="100"
+                  ></i>
+                </Nav.Link>
+              ) : null}
             </Nav>
           </Navbar.Collapse>
           {/* <CartIcon /> */}
@@ -129,5 +157,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { signOut, addToCart, getCart }
+  { signOut, addToCart, getCart, getMacBooks }
 )(NavBar);

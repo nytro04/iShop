@@ -6,7 +6,7 @@ import {
 } from "../actions/types";
 
 const INITIAL_STATE = {
-  isLoggedIn: null
+  isLoggedIn: false
 };
 
 export default (state = INITIAL_STATE, action) => {

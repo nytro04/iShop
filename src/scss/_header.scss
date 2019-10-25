@@ -5,6 +5,9 @@
 .nav_line {
   border-bottom: 1px solid #e7e7e7;
 }
+.footer_line {
+  border-top: 1px solid #e7e7e7;
+}
 
 .header__carousel {
   width: 100%;
@@ -37,6 +40,7 @@
   height: 100% !important;
   width: 130% !important;
   color: black;
+  font-weight: 300;
 }
 
 .carousel-indicators li {

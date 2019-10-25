@@ -1,4 +1,4 @@
-import { CREATE_PRODUCT, GET_PRODUCT } from "../actions/types";
+import { CREATE_PRODUCT, GET_PRODUCT, GET_MACBOOKS } from "../actions/types";
 
 const INITIAL_STATE = {};
 
@@ -11,8 +11,14 @@ export default (state = INITIAL_STATE, action) => {
     case GET_PRODUCT:
       return {
         ...state,
-        payload
+        product: payload
       };
+    case GET_MACBOOKS: {
+      return {
+        ...state,
+        product: payload
+      };
+    }
     default:
       return state;
   }

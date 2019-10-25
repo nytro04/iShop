@@ -21,6 +21,8 @@ class AddProduct extends Component {
   };
 
   render() {
+    const { imageUrl, name, price, description } = this.props.product;
+
     const RegisterSchema = Yup.object().shape({
       name: Yup.string()
         .required("Product name Field is required")
@@ -33,10 +35,10 @@ class AddProduct extends Component {
     });
 
     const initialValues = {
-      name: "",
-      description: "",
-      imageUrl: "",
-      price: ""
+      name,
+      description,
+      imageUrl,
+      price
     };
 
     return (
@@ -49,7 +51,8 @@ class AddProduct extends Component {
             setSubmitting(true);
 
             console.log(values);
-            this.props.editProduct(values);
+            const { id } = this.props.match.params;
+            this.props.editProduct(values, id);
             resetForm();
             setSubmitting(false);
           }}
@@ -127,7 +130,16 @@ class AddProduct extends Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  const { id } = ownProps.match.params;
+  const { products } = state.firestore.data;
+  const product = products[id];
+  return {
+    product
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { createProduct, editProduct }
 )(AddProduct);

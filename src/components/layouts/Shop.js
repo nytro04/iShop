@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
-import ItemList from "./ItemList";
+// import ItemList from "./ItemList";
 import { Container } from "react-bootstrap";
 
 export class Shop extends Component {
@@ -12,7 +12,7 @@ export class Shop extends Component {
     return (
       <div>
         Trending...
-        <ItemList products={products} />
+        {/* <ItemList products={products} /> */}
       </div>
     );
   }

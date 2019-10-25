@@ -22,17 +22,19 @@ class CreateProduct extends Component {
 
   render() {
     const RegisterSchema = Yup.object().shape({
+      type: Yup.string().required("Product type Field is required"),
       name: Yup.string()
         .required("Product name Field is required")
         .min(3, "Name must be at least 3 characters"),
       description: Yup.string()
-        .required("Email field is required")
+        .required("Product description field is required")
         .min(20, "Name must be at least 20 characters"),
       imageUrl: Yup.string().required("Image Url field is required"),
       price: Yup.number().required("Price field is required")
     });
 
     const initialValues = {
+      type: "",
       name: "",
       description: "",
       imageUrl: "",
@@ -63,6 +65,23 @@ class CreateProduct extends Component {
             errors
           }) => (
             <Form noValidate onSubmit={handleSubmit}>
+              <select
+                className="custom-select mb-3"
+                name="type"
+                placeholder="Product type"
+                value={values.type}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                isValid={touched.type && !errors.type ? true : false}
+                isInvalid={!!errors.type ? true : false}
+                renderErrorText={this.renderError(errors.name, touched.name)}
+              >
+                <option value="" label="Select product type" disabled />
+                <option value="iPhone" label="iPhone" />
+                <option value="iMac" label="iMac" />
+                <option value="MacBook" label="MacBook" />
+                <option value="iWatch" label="iWatch" />
+              </select>
               <TextInput
                 type="text"
                 name="name"
@@ -93,7 +112,7 @@ class CreateProduct extends Component {
               <TextInput
                 type="text"
                 name="imageUrl"
-                placeholder="imageUrl"
+                placeholder="image Url"
                 value={values.imageUrl}
                 onChange={handleChange}
                 onBlur={handleBlur}

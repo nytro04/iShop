@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { addToCart } from "../../actions/cartActions";
+import { deleteProduct, getMacBooks } from "../../actions/productActions";
 
 class Item extends React.Component {
   onAddToCart = () => {
@@ -17,7 +18,10 @@ class Item extends React.Component {
     };
 
     this.props.addToCart(cartData);
+    this.props.getMacBooks();
   };
+
+  // handleDelete = id => {};
 
   render() {
     const { product, authId } = this.props;
@@ -28,51 +32,54 @@ class Item extends React.Component {
     console.log(product);
 
     return (
-      //   <CardGroup>
-      <div className="row">
-        <div className="container py-1 col-8">
-          <div className="card p-3 d-flex ">
-            <div className="row ">
-              <div className="col-md-3">
-                <img src={product.imageUrl} width="160px" height="120px" />
-              </div>
-              <div className="col-md-6">
-                <div className="card-block">
-                  <h4 className="card-title">{product.name}</h4>
-                  <p className="card-text">
-                    {product.description} Lorem ipsum dolor sit amet consectetu
-                    ...
-                  </p>
-                  <p className="card-subtitle">GH₵ {product.price}</p>
+      <div>
+        <div className="row">
+          <div className="container py-1 col-8">
+            <div className="card p-3 d-flex ">
+              <div className="row ">
+                <div className="col-md-3">
+                  <img src={product.imageUrl} width="160px" height="120px" />
                 </div>
-              </div>
-              <div className="col-md-3 align-self-end">
-                <Link to={`/products/${product.id}`} onClick={this.onAddToCart}>
-                  <i className="fas fa-list-ul card__links-icon"> </i>
-                </Link>
-                <span onClick={this.onAddToCart}>
-                  <i className="fas fa-shopping-cart card__links-icon"></i>
-                </span>
-                {authId === authorId ? (
+                <div className="col-md-6">
+                  <div className="card-block">
+                    <h4 className="card-title">{product.name}</h4>
+                    <p className="card-text">
+                      {product.description} Lorem ipsum dolor sit amet
+                      consectetu ...
+                    </p>
+                    <p className="card-subtitle">GH₵ {product.price}</p>
+                  </div>
+                </div>
+                <div className="col-md-3 align-self-end">
                   <Link
-                    to={`/product/edit/${product.id}`}
+                    to={`/products/${product.id}`}
                     onClick={this.onAddToCart}
                   >
-                    <i className="fas fa-pencil-alt text-primary card__links-icon"></i>
+                    <i className="fas fa-list-ul card__links-icon"> </i>
                   </Link>
-                ) : null}
-                {authId === authorId ? (
                   <span onClick={this.onAddToCart}>
-                    <i className="fas fa-trash-alt text-danger card__links-icon"></i>
+                    <i className="fas fa-shopping-cart card__links-icon"></i>
                   </span>
-                ) : null}
+                  {authId === authorId ? (
+                    <Link
+                      to={`/products/edit/${product.id}`}
+                      onClick={this.onAddToCart}
+                    >
+                      <i className="fas fa-pencil-alt text-primary card__links-icon"></i>
+                    </Link>
+                  ) : null}
+                  {authId === authorId ? (
+                    <span onClick={() => this.props.deleteProduct(product.id)}>
+                      <i className="fas fa-trash-alt text-danger card__links-icon"></i>
+                    </span>
+                  ) : null}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     );
-    //   </CardGroup>
   }
 }
 
@@ -84,5 +91,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { addToCart }
+  { addToCart, deleteProduct, getMacBooks }
 )(Item);

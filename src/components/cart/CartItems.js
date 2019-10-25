@@ -17,8 +17,8 @@ class CartItems extends React.Component {
     if (cart) {
       cartContents = cart.map(cartItem => (
         <div key={cartItem.id}>
-          {/* <CartItem cartItem={cartItem} /> */}
-          <Modal />
+          <CartItem cartItem={cartItem} />
+          {/* <Modal /> */}
         </div>
       ));
     } else if (cart === null) {

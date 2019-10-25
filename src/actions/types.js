@@ -7,3 +7,4 @@ export const ADD_ITEM_TO_CART = "ADD_ITEM_TO_CART";
 export const GET_CART = "GET_CART";
 export const REMOVE_CART_ITEM = "REMOVE_CART_ITEM";
 export const GET_PRODUCT = "GET_PRODUCT";
+export const GET_MACBOOKS = "GET_MACBOOKS";

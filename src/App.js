@@ -15,6 +15,11 @@ import CartList from "./components/cart/CartList";
 import Home from "./components/layouts/Home";
 import EditProduct from "./components/product/EditProduct";
 import CreateProduct from "./components/product/CreateProduct";
+import ProductDelete from "./components/product/ProductDelete";
+import GetMacBooks from "./components/product/GetMacBooks";
+import ContactPage from "./components/layouts/ContactPage";
+import AboutPage from "./components/layouts/AboutPage";
+import Footer from "./components/layouts/Footer";
 
 class App extends React.Component {
   render() {
@@ -24,14 +29,23 @@ class App extends React.Component {
           <NavBar />
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/contact" component={ContactPage} />
+            <Route exact path="/about" component={AboutPage} />
             <Route exact path="/login" component={LogIn} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/shop" component={ItemListbk} />
             <Route exact path="/cart" component={CartList} />
-            <Route exact path="/product/new" component={CreateProduct} />
-            <Route exact path="/product/edit/:id" component={EditProduct} />
+            <Route exact path="/getMacbooks" component={GetMacBooks} />
+            <Route exact path="/products/new" component={CreateProduct} />
+            <Route exact path="/products/edit/:id" component={EditProduct} />
+            <Route
+              exact
+              path="/products/delete/:id"
+              component={ProductDelete}
+            />
             <Route exact path="/products/:id" component={ProductDetails} />
           </Switch>
+          {/* <Footer /> */}
         </div>
       </Router>
     );

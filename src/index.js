@@ -16,6 +16,7 @@ import firebase from "./firebase/FirebaseConfig";
 import { Provider } from "react-redux";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import { Spinner } from "react-bootstrap";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -47,6 +48,7 @@ ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
       <App />
+      <Spinner />
     </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById("root")

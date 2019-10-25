@@ -1,4 +1,4 @@
-import { CREATE_PRODUCT, GET_PRODUCT } from "./types";
+import { CREATE_PRODUCT, GET_PRODUCT, GET_MACBOOKS } from "./types";
 import history from "../history";
 
 //Create Product
@@ -19,6 +19,7 @@ export const createProduct = productData => (
     .add({ ...productData, authorId })
     .then(() => {
       dispatch({ type: CREATE_PRODUCT });
+      
       history.push("/");
     })
     .catch(err => {
@@ -59,4 +60,39 @@ export const editProduct = (productData, id) => (
     .collection("products")
     .doc(id)
     .update({ ...productData });
+  history.push("/");
+};
+
+// Delete Product
+export const deleteProduct = id => (dispatch, getState, { getFirestore }) => {
+  if (
+    window.confirm(
+      `Are you sure you to delete this product?
+      This action can not be undone`
+    )
+  ) {
+    const firestore = getFirestore();
+
+    firestore
+      .collection("products")
+      .doc(id)
+      .delete();
+  }
+};
+
+// Filter methods
+export const getMacBooks = () => (dispatch, getState, { getFirestore }) => {
+  const firestore = getFirestore();
+  let newMacs = [];
+  firestore
+    .collection("products")
+    .where("type", "==", "MacBook")
+    .get()
+    .then(MacBooks => {
+      MacBooks.forEach(MacBook => {
+        newMacs.push(MacBook.data());
+        console.log(newMacs);
+      });
+      dispatch({ type: GET_MACBOOKS, payload: newMacs });
+    });
 };

@@ -12,11 +12,11 @@ class ProductDetails extends Component {
     this.props.getProduct(id);
   }
   renderProductDetails = () => {
-    const { product } = this.props;
+    const { imageUrl, name, price, description } = this.props.product;
 
-    if (product) {
+    if (this.props.product) {
       return (
-        <section className="section-content bg padding-y-sm">
+        <section className="section-content bg padding-y-sm mt-5">
           <div className="container">
             <div className="row">
               <div className="col-xl-10 col-md-9 col-sm-12">
@@ -29,8 +29,8 @@ class ProductDetails extends Component {
                             {" "}
                             <img
                               className="img-fluid"
-                              src={product.imageUrl}
-                              alt="Alternate Text"
+                              src={imageUrl}
+                              alt={name}
                             />
                           </div>
                         </div>
@@ -38,40 +38,47 @@ class ProductDetails extends Component {
                     </aside>
                     <aside className="col-sm-6">
                       <article className="card-body">
-                        <h3 className="title mb-3">{product.name}</h3>
+                        <h3 className="title m-3 text-center font-weight-bold">
+                          {name}
+                        </h3>
 
-                        <div className="mb-3">
-                          <var className="price h3 text-primary">
-                            GHC {product.price}
-                          </var>
+                        <div className="m-3">
+                          <h3
+                            className="price text-center"
+                            style={{ color: "#55c57a" }}
+                          >
+                            GH₵ {price}
+                          </h3>
                         </div>
                         <dl>
                           <dt>Description:</dt>
                           <dd>
-                            <p>{product.description} </p>
+                            <p>{description} </p>
                           </dd>
                         </dl>
                         <hr />
                         <div className="row">
                           <div className="col-sm-5">
                             <dl className="dlist-inline">
-                              <dt>Quantity: </dt>
-                              <dd>
-                                <select
-                                  className="form-control form-control-sm"
-                                  style={{ width: "70px" }}
-                                />
-                              </dd>
+                              <dt>
+                                Quantity:
+                                <dd>
+                                  <select
+                                    className="form-control form-control-sm"
+                                    style={{ width: "70px" }}
+                                  />
+                                </dd>
+                              </dt>
                             </dl>
                           </div>
                         </div>
                         <hr />
 
-                        <Link to="/carts" className="btn  btn-outline-dark">
+                        <Link to="/carts" className="btn  btn-outline-info">
                           {" "}
                           Add To Cart{" "}
                         </Link>
-                        <Link to="#" className="btn  btn-outline-dark mx-3">
+                        <Link to="#" className="btn  btn-outline-info mx-3">
                           CheckOut{" "}
                         </Link>
                       </article>
