@@ -7,29 +7,12 @@ import { getCart } from "../../actions/cartActions";
 import { getMacBooks } from "../../actions/productActions";
 
 class NavBar extends Component {
-  state = {
-    cartQty: 0
-  };
-
-  componentDidMount() {
-    this.setState({
-      cartQty: JSON.parse(localStorage.getItem("iShopCart")).length
-    });
+  getCartCount() {
+    return this.props.cart.length;
   }
 
-
   render() {
-    const { isLoggedIn, signOut } = this.props;
-
-    // if (cartQty.length === 0) {
-    //   cartQty.length = 0;
-    // } else {
-    //   cartQty = JSON.parse(localStorage.getItem("iShopCart")).length;
-    // }
-
-    // console.log(cartQty.length);
-
-    // const cartQty = JSON.parse(localStorage.getItem("iShopCart")).length;
+    const { isLoggedIn, signOut, cart } = this.props;
 
     return (
       <div>
@@ -42,9 +25,6 @@ class NavBar extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto">
-              {/* <Nav.Link as={Link} to="/shop">
-                Shop
-              </Nav.Link> */}
               <NavDropdown title="Categories" id="collasible-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/">
                   iPhones
@@ -72,29 +52,14 @@ class NavBar extends Component {
               </Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link as={Link} to="/">
-                <i
-                  className="fas fa-heart"
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  title="Liked items"
-                  delay="10"
-                ></i>
-              </Nav.Link>
-
-              <Nav.Link
-                as={Link}
-                to="/cart"
-                className="cart-icon"
-                // onClick={this.cartState}
-              >
+              <Nav.Link as={Link} to="/cart" className="cart-icon">
                 <i
                   className="fas fa-shopping-cart"
                   data-toggle="tooltip"
                   data-placement="bottom"
                   title="User Cart"
                 ></i>
-                <span className="item-count">{this.state.cartQty}</span>
+                <span className="item-count">{this.getCartCount()}</span>
               </Nav.Link>
 
               <NavDropdown

@@ -1,7 +1,7 @@
 import { ADD_ITEM_TO_CART, REMOVE_CART_ITEM, GET_CART } from "../actions/types";
 
 const INITIAL_STATE = {
-  cart: []
+  cart: JSON.parse(localStorage.getItem("iShopCart")) || []
 };
 
 export default (state = INITIAL_STATE, action) => {
