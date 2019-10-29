@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { signOut } from "../../actions/authActions";
-import { getCart, addToCart } from "../../actions/cartActions";
+import { getCart } from "../../actions/cartActions";
 import { getMacBooks } from "../../actions/productActions";
 
 class NavBar extends Component {
@@ -11,19 +11,25 @@ class NavBar extends Component {
     cartQty: 0
   };
 
-  // handleCartUpdate = () => {
-  //   this.props.getCart();
-  // };
+  componentDidMount() {
+    this.setState({
+      cartQty: JSON.parse(localStorage.getItem("iShopCart")).length
+    });
+  }
+
 
   render() {
-    const { isLoggedIn, signOut, cart } = this.props;
+    const { isLoggedIn, signOut } = this.props;
 
-    // console.log(cart.length);
+    // if (cartQty.length === 0) {
+    //   cartQty.length = 0;
+    // } else {
+    //   cartQty = JSON.parse(localStorage.getItem("iShopCart")).length;
+    // }
 
-    // const cartQty =
-    //   cart.length === 0
-    //     ? 0
-    //     : JSON.parse(localStorage.getItem("iShopCart")).length;
+    // console.log(cartQty.length);
+
+    // const cartQty = JSON.parse(localStorage.getItem("iShopCart")).length;
 
     return (
       <div>
@@ -87,7 +93,6 @@ class NavBar extends Component {
                   data-toggle="tooltip"
                   data-placement="bottom"
                   title="User Cart"
-                  delay="100"
                 ></i>
                 <span className="item-count">{this.state.cartQty}</span>
               </Nav.Link>
@@ -157,5 +162,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { signOut, addToCart, getCart, getMacBooks }
+  { signOut, getCart, getMacBooks }
 )(NavBar);

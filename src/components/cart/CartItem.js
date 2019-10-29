@@ -9,7 +9,7 @@ class CartItem extends Component {
         style={{ paddingTop: "5px", paddingBottom: "5px" }}
       >
         <div className="row">
-          <div className="col-12 col-sm-12 col-md-2 text-center">
+          <div className="col-12 col-sm-12 col-md-2 text-center my-3">
             <img
               className="img-responsive"
               src={cartItem.imageUrl}
@@ -18,42 +18,36 @@ class CartItem extends Component {
               height="80"
             />
           </div>
-          <div className="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-            <h6 className="product-name">
+          <div className="col-12 text-sm-center col-sm-12 text-md-left col-md-6 my-3">
+            <h6 className="product-name my-3">
               <strong>{cartItem.name}</strong>
             </h6>
-            <p>
+            {/* <p className="my-3">
               <small>{cartItem.description}</small>
-            </p>
+            </p> */}
           </div>
-          <div className="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+          <div className="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row my-3">
             <div
-              className="col-3 col-sm-3 col-md-6 text-md-right"
+              className="col-3 col-sm-3 col-md-6 text-md-right my-3"
               style={{ paddingTop: "5px" }}
             >
               <h6>
                 <strong>
-                  {cartItem.price} <span className="text-muted">x</span>
+                  {cartItem.price}{" "}
+                  <span className="text-muted my-3">
+                    <i class="fas fa-times"></i>
+                  </span>
                 </strong>
               </h6>
             </div>
-            <div className="col-4 col-sm-4 col-md-4">
-              <div className="quantity">
-                <input type="button" value="+" className="plus" />
-                <input
-                  type="number"
-                  step="1"
-                  max="99"
-                  min="1"
-                  value="1"
-                  title="Qty"
-                  className="qty"
-                  size="4"
-                />
-                <input type="button" value="-" className="minus" />
-              </div>
+            <div className="col-4 col-sm-4 col-md-4 my-3">
+              <input
+                type="number"
+                className="form-control form-control-sm"
+                style={{ width: "70px" }}
+              />
             </div>
-            <div className="col-2 col-sm-2 col-md-2 text-right">
+            <div className="col-2 col-sm-2 col-md-2 text-right my-3">
               <button
                 // onClick={this.onDeleteClick.bind(this, cartItem._id)}
                 type="button"

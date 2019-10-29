@@ -2,7 +2,7 @@ import React from "react";
 // import { Card, Row, Col, CardGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { addToCart } from "../../actions/cartActions";
+import { addToCart, getCart } from "../../actions/cartActions";
 import { deleteProduct, getMacBooks } from "../../actions/productActions";
 
 class Item extends React.Component {
@@ -18,8 +18,12 @@ class Item extends React.Component {
     };
 
     this.props.addToCart(cartData);
-    this.props.getMacBooks();
+    // this.props.getCart();
   };
+
+  componentDidUpdate() {
+    this.props.getCart();
+  }
 
   // handleDelete = id => {};
 
@@ -51,20 +55,14 @@ class Item extends React.Component {
                   </div>
                 </div>
                 <div className="col-md-3 align-self-end">
-                  <Link
-                    to={`/products/${product.id}`}
-                    onClick={this.onAddToCart}
-                  >
+                  <Link to={`/products/${product.id}`}>
                     <i className="fas fa-list-ul card__links-icon"> </i>
                   </Link>
                   <span onClick={this.onAddToCart}>
                     <i className="fas fa-shopping-cart card__links-icon"></i>
                   </span>
                   {authId === authorId ? (
-                    <Link
-                      to={`/products/edit/${product.id}`}
-                      onClick={this.onAddToCart}
-                    >
+                    <Link to={`/products/edit/${product.id}`}>
                       <i className="fas fa-pencil-alt text-primary card__links-icon"></i>
                     </Link>
                   ) : null}
@@ -91,5 +89,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { addToCart, deleteProduct, getMacBooks }
+  { addToCart, getCart, deleteProduct, getMacBooks }
 )(Item);

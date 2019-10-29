@@ -37,7 +37,8 @@ export default (state = INITIAL_STATE, action) => {
     case GET_CART:
       return {
         ...state,
-        cart: action.payload
+        cart: JSON.parse(localStorage.getItem("iShopCart"))
+        // cart: action.payload
       };
     default:
       return state;
