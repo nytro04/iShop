@@ -3,27 +3,16 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { signOut } from "../../actions/authActions";
-import { getCart, addToCart } from "../../actions/cartActions";
+import { getCart } from "../../actions/cartActions";
 import { getMacBooks } from "../../actions/productActions";
 
 class NavBar extends Component {
-  state = {
-    cartQty: 0
-  };
-
-  // handleCartUpdate = () => {
-  //   this.props.getCart();
-  // };
+  getCartCount() {
+    return this.props.cart.length;
+  }
 
   render() {
     const { isLoggedIn, signOut, cart } = this.props;
-
-    // console.log(cart.length);
-
-    // const cartQty =
-    //   cart.length === 0
-    //     ? 0
-    //     : JSON.parse(localStorage.getItem("iShopCart")).length;
 
     return (
       <div>
@@ -36,9 +25,6 @@ class NavBar extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto">
-              {/* <Nav.Link as={Link} to="/shop">
-                Shop
-              </Nav.Link> */}
               <NavDropdown title="Categories" id="collasible-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/">
                   iPhones
@@ -66,30 +52,14 @@ class NavBar extends Component {
               </Nav.Link>
             </Nav>
             <Nav>
-              <Nav.Link as={Link} to="/">
-                <i
-                  className="fas fa-heart"
-                  data-toggle="tooltip"
-                  data-placement="bottom"
-                  title="Liked items"
-                  delay="10"
-                ></i>
-              </Nav.Link>
-
-              <Nav.Link
-                as={Link}
-                to="/cart"
-                className="cart-icon"
-                // onClick={this.cartState}
-              >
+              <Nav.Link as={Link} to="/cart" className="cart-icon">
                 <i
                   className="fas fa-shopping-cart"
                   data-toggle="tooltip"
                   data-placement="bottom"
                   title="User Cart"
-                  delay="100"
                 ></i>
-                <span className="item-count">{this.state.cartQty}</span>
+                <span className="item-count">{this.getCartCount()}</span>
               </Nav.Link>
 
               <NavDropdown
@@ -157,5 +127,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { signOut, addToCart, getCart, getMacBooks }
+  { signOut, getCart, getMacBooks }
 )(NavBar);

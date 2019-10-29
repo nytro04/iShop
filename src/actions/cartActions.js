@@ -10,7 +10,7 @@ export const removeCartItem = id => dispatch => {
 
 export const getCart = () => dispatch => {
   dispatch({
-    type: GET_CART,
-    payload: JSON.parse(localStorage.getItem("iShopCart"))
+    type: GET_CART
+    // payload: JSON.parse(localStorage.getItem("iShopCart"))
   });
 };

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import { firestoreConnect } from "react-redux-firebase";
+// import { firestoreConnect } from "react-redux-firebase";
 import { Link } from "react-router-dom";
 import { getProduct } from "../../actions/productActions";
 
@@ -28,7 +28,7 @@ class ProductDetails extends Component {
                           <div>
                             {" "}
                             <img
-                              className="img-fluid"
+                              className="img-fluid product__detail--img"
                               src={imageUrl}
                               alt={name}
                             />
@@ -51,7 +51,7 @@ class ProductDetails extends Component {
                           </h3>
                         </div>
                         <dl>
-                          <dt>Description:</dt>
+                          <dt className="my-3">Description:</dt>
                           <dd>
                             <p>{description} </p>
                           </dd>
@@ -63,10 +63,13 @@ class ProductDetails extends Component {
                               <dt>
                                 Quantity:
                                 <dd>
-                                  <select
-                                    className="form-control form-control-sm"
-                                    style={{ width: "70px" }}
-                                  />
+                                  <dd>
+                                    <input
+                                      type="number"
+                                      className="form-control form-control-sm my-3"
+                                      style={{ width: "70px" }}
+                                    />
+                                  </dd>
                                 </dd>
                               </dt>
                             </dl>
