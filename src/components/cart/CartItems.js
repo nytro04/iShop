@@ -23,7 +23,7 @@ class CartItems extends React.Component {
       ));
     } else if (cart === null) {
       cartContents = (
-        <div className="display-3 text-center">
+        <div className="display-4 text-center mt-4">
           You have No items in your cart
         </div>
       );
