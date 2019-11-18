@@ -8,11 +8,15 @@ import { getMacBooks } from "../../actions/productActions";
 
 class NavBar extends Component {
   getCartCount() {
-    return this.props.cart.length;
+    if (this.props.cart === null) {
+      return 0;
+    } else {
+      return this.props.cart.length;
+    }
   }
 
   render() {
-    const { isLoggedIn, signOut, cart } = this.props;
+    const { isLoggedIn, signOut } = this.props;
 
     return (
       <div>
@@ -125,7 +129,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { signOut, getCart, getMacBooks }
-)(NavBar);
+export default connect(mapStateToProps, { signOut, getCart, getMacBooks })(
+  NavBar
+);

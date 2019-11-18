@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { getMacBooks } from "../../actions/productActions";
 import { Link } from "react-router-dom";
 
 class GetMacBooks extends Component {
+  componentDidMount() {
+    this.props.getMacBooks();
+  }
+
   render() {
-    const { authId, macbook } = this.props;
+    const { authId } = this.props;
+
+    const { macbook } = this.props;
 
     console.log(macbook);
 
     return (
-      <div>test</div>
+      <div>MacBooks</div>
       // <div>
       //   <h3 className="text-center m-3">MacBooks</h3>
       //   <div>
@@ -68,8 +75,9 @@ class GetMacBooks extends Component {
 
 const mapStateToProps = state => {
   return {
-    authId: state.firebase.auth.id
+    authId: state.firebase.auth.id,
+    products: state.products.product
   };
 };
 
-export default connect(mapStateToProps)(GetMacBooks);
+export default connect(mapStateToProps, { getMacBooks })(GetMacBooks);

@@ -31,10 +31,6 @@ class Item extends React.Component {
     const { product, authId } = this.props;
     const { authorId } = product;
 
-    console.log("signed in user id", authId);
-    console.log("product author", authorId);
-    console.log(product);
-
     return (
       <div>
         <div className="row">

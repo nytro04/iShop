@@ -22,14 +22,15 @@ class CartItems extends React.Component {
         </div>
       ));
     } else if (cart === null) {
-      cartContents = <div>No items in cart</div>;
+      cartContents = (
+        <div className="display-3 text-center">
+          You have No items in your cart
+        </div>
+      );
     }
 
     return <div>{cartContents}</div>;
   }
 }
 
-export default connect(
-  null,
-  { getCart }
-)(CartItems);
+export default connect(null, { getCart })(CartItems);

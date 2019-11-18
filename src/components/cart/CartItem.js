@@ -49,7 +49,7 @@ class CartItem extends Component {
             </div>
             <div className="col-2 col-sm-2 col-md-2 text-right my-3">
               <button
-                // onClick={this.onDeleteClick.bind(this, cartItem._id)}
+                onClick={this.onDeleteClick.bind(this, cartItem._id)}
                 type="button"
                 className="btn btn-outline-danger btn-xs"
               >

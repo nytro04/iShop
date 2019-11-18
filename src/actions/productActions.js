@@ -19,7 +19,7 @@ export const createProduct = productData => (
     .add({ ...productData, authorId })
     .then(() => {
       dispatch({ type: CREATE_PRODUCT });
-      
+
       history.push("/");
     })
     .catch(err => {
@@ -89,10 +89,12 @@ export const getMacBooks = () => (dispatch, getState, { getFirestore }) => {
     .where("type", "==", "MacBook")
     .get()
     .then(MacBooks => {
-      MacBooks.forEach(MacBook => {
-        newMacs.push(MacBook.data());
-        console.log(newMacs);
-      });
-      dispatch({ type: GET_MACBOOKS, payload: newMacs });
+      if (MacBooks) {
+        MacBooks.forEach(MacBook => {
+          newMacs.push(MacBook.data());
+          console.log(newMacs);
+          dispatch({ type: GET_MACBOOKS, payload: newMacs });
+        });
+      }
     });
 };

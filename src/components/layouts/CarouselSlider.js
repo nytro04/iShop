@@ -15,10 +15,10 @@ const CarouselSlider = () => {
               <img className="d-block w-100" src={iphoneImg} alt="Ipone" />
             </div>
             <div className="TextCont"></div>
-            <Carousel.Caption>
+            {/* <Carousel.Caption>
               <h3>iPhones</h3>
               <p>Grab your latest and authentic iphones at affordable prices</p>
-            </Carousel.Caption>
+            </Carousel.Caption> */}
           </div>
         </Carousel.Item>
         <Carousel.Item className="header__carousel">
@@ -27,12 +27,12 @@ const CarouselSlider = () => {
               <img className="d-block w-100" src={macbookImg} alt="MacBooks" />
             </div>
             <div className="TextCont"></div>
-            <Carousel.Caption>
+            {/* <Carousel.Caption>
               <h3>MacBooks</h3>
               <p>
                 Grab your latest and authentic MacBooks at affordable prices
               </p>
-            </Carousel.Caption>
+            </Carousel.Caption> */}
           </div>
         </Carousel.Item>
         <Carousel.Item className="header__carousel">
@@ -41,10 +41,10 @@ const CarouselSlider = () => {
               <img className="d-block w-100" src={iMacImg} alt="iMac" />
             </div>
             <div className="TextCont"></div>
-            <Carousel.Caption>
+            {/* <Carousel.Caption>
               <h3>iMac </h3>
               <p>Grab your latest and authentic iMacs at affordable prices</p>
-            </Carousel.Caption>
+            </Carousel.Caption> */}
           </div>
         </Carousel.Item>
         <Carousel.Item className="header__carousel">
@@ -53,18 +53,18 @@ const CarouselSlider = () => {
               <img className="d-block w-100" src={iwatchImg} alt="iWatch" />
             </div>
             <div className="TextCont"></div>
-            <Carousel.Caption>
-              <h3>iWatch </h3>
+            {/* <Carousel.Caption> */}
+            {/* <h3>iWatch </h3>
               <p>
                 Grab your latest and authentic iWatches at affordable prices
-              </p>
-              {/* <p>
+              </p> */}
+            {/* <p>
                 Grab your latest and authentic iWatches at affordable prices
               </p>
               <p>
                 Grab your latest and authentic iWatches at affordable prices
               </p> */}
-            </Carousel.Caption>
+            {/* </Carousel.Caption> */}
           </div>
         </Carousel.Item>
       </Carousel>

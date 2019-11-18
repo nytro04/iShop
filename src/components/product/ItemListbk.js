@@ -46,7 +46,6 @@ class ItemList extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     products: state.firestore.ordered.products
   };
